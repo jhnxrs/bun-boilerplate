@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  postgres_production:
+    image: postgres:16
+    container_name: postgres_production
+    environment:
+      POSTGRES_USER: prod_user
+      POSTGRES_PASSWORD: prod_password
+      POSTGRES_DB: prod_db
+    ports:
+      - "5432:5432"  # Expose on host port 5432
+    volumes:
+      - prod_data:/var/lib/postgresql/data
+
+  postgres_test:
+    image: postgres:16
+    container_name: postgres_test
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: test_db
+    ports:
+      - "5433:5432"  # Expose on host port 5433
+    volumes:
+      - test_data:/var/lib/postgresql/data
+
+volumes:
+  prod_data:
+  test_data:
